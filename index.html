@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css"/>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.map"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <style>
         body {
             padding: 0;
@@ -27,13 +27,27 @@
                 'Imagery © <a href="http://mapbox.com">Mapbox</a>',
             id: 'examples.map-i875mjb7'
         }).addTo(map);
-        map.setView([51.505, -0.09], 13);
-        var marker = L.marker([53.550556, 9.993333]);
+        map.setView([50.719114, 7.117572], 13);
+        var marker = L.marker([50.719114, 7.117572]);
         marker.addTo(map);
 
-        var refresh = function() {
+        var name = document.location.hash || '#default';
+        var center = true;
 
-        }
+        var refresh = function() {
+            $.getJSON("recording/" + name, function(data) {
+                if (data.error) { alert('Error: ' + data.error) }
+                if (data.lat && data.lon) {
+                    // Update marker
+                    marker.setLatLng([data.lat,data.lon]);
+                    if (center) {
+                        map.setView( [data.lat,data.lon], 16 );
+                        center = false;
+                    }
+                }
+
+            });
+        };
         refresh();
         setInterval(refresh, 5000);
     </script>
