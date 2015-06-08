@@ -32,6 +32,7 @@
         marker.addTo(map);
 
         var name = document.location.hash || '#default';
+        name = name.substr(1);
         var center = true;
 
         var refresh = function() {
