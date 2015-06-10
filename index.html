@@ -59,6 +59,15 @@
         };
         var layersControl = L.control.layers(baseMaps);
         map.addControl(layersControl);
+        var AutoFollowControl = L.Control.extend({
+            options: {
+                position: 'topright'
+            },
+            onAdd: function(map) {
+                var container = L.DomUtil.create('div', 'auto-follow-control');
+
+            }
+        });
         var marker = L.marker([50.719114, 7.117572]);
         marker.addTo(map);
 
