@@ -19,7 +19,6 @@
 <body>
     <div id="map"></div>
     <script>
-        var baseMap
         var OpenStreetMap_DE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
                                maxZoom: 18,
                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
@@ -32,15 +31,34 @@
         var Thunderforest_Outdoors = L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
                                      attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>,'
                                         + ' &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
-        var map = L.map('map');
-        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            id: 'examples.map-i875mjb7'
-        }).addTo(map);
-        map.setView([50.719114, 7.117572], 7);
+        var Mapbox = L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+                     maxZoom: 18,
+                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                                  '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                                  'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                     id: 'examples.map-i875mjb7'});
+        var MapQuestOpen_OSM = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+                               type: 'map',
+                               ext: 'jpg',
+                               attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a>'
+                                            + ' &mdash; Map data &copy;'
+                                            + ' <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                               subdomains: '1234'});
+        var map = L.map('map', {
+                center: [50.719114, 7.117572],
+                zoom: 10,
+                layers: [OpenStreetMap_DE]
+        });
+        var baseMaps = {
+            "Openstreetmap DE": OpenStreetMap_DE,
+            "Opencyclemap": Thunderforest_OpenCycleMap,
+            "HikeBike": HikeBike_HikeBike,
+            "Outdoors": Thunderforest_Outdoors,
+            "Mapbox": Mapbox,
+            "Mapquest": MapQuestOpen_OSM
+        };
+        var layersControl = L.control.layers(baseMaps);
+        map.addControl(layersControl);
         var marker = L.marker([50.719114, 7.117572]);
         marker.addTo(map);
 
