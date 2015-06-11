@@ -14,6 +14,15 @@
         html, body, #map {
             height: 100%;
         }
+        .leaflet-control-map-content {
+            box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.4);
+            background: #FFF none repeat scroll 0% 0%;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        .middle {
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -52,8 +61,8 @@
         var baseMaps = {
             "Openstreetmap DE": OpenStreetMap_DE,
             "Opencyclemap": Thunderforest_OpenCycleMap,
-            "HikeBike": HikeBike_HikeBike,
-            "Outdoors": Thunderforest_Outdoors,
+            "Hike & Bike": HikeBike_HikeBike,
+            "Thunderforest Outdoors": Thunderforest_Outdoors,
             "Mapbox": Mapbox,
             "Mapquest": MapQuestOpen_OSM
         };
@@ -64,10 +73,20 @@
                 position: 'topright'
             },
             onAdd: function(map) {
-                var container = L.DomUtil.create('div', 'auto-follow-control');
-
+                var container = L.DomUtil.create('div', 'leaflet-control');
+                var form = L.DomUtil.create('div', 'leaflet-control-map-content', container);
+                var label = L.DomUtil.create('label', '', form);
+                this.input = L.DomUtil.create('input', 'middle', label);
+                this.input.type = 'checkbox';
+                this.input.id = 'autoFollow';
+                var text = L.DomUtil.create('span', 'middle', label);
+                text.innerHTML = 'Follow';
+                return container;
             }
         });
+        
+        map.addControl(new AutoFollowControl());
+
         var marker = L.marker([50.719114, 7.117572]);
         marker.addTo(map);
 
@@ -81,7 +100,7 @@
                 if (data.lat && data.lon) {
                     // Update marker
                     marker.setLatLng([data.lat,data.lon]);
-                    if (center) {
+                    if (center || $('#autoFollow').prop('checked')) {
                         map.setView( [data.lat,data.lon], 16 );
                         center = false;
                     }
