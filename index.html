@@ -92,7 +92,7 @@
 
         var name = document.location.hash || '#default';
         name = name.substr(1);
-        var center = true;
+        var justOpened = true;
 
         var refresh = function() {
             $.getJSON("recording/" + name, function(data) {
@@ -100,9 +100,11 @@
                 if (data.lat && data.lon) {
                     // Update marker
                     marker.setLatLng([data.lat,data.lon]);
-                    if (center || $('#autoFollow').prop('checked')) {
-                        map.setView( [data.lat,data.lon], 16 );
-                        center = false;
+                    if (justOpened) {
+                        map.setView([data.lat, data.lon], 14);
+                        justOpened = false;
+                    } else if ($('#autoFollow').prop('checked')) {
+                        map.setView([data.lat, data.lon]);
                     }
                 }
 
