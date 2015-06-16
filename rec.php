@@ -3,6 +3,7 @@ header('Content-Type: text/plain');
 
 $name = trim($_REQUEST['name']);
 if ($name == '') $name = "default";
+$name = basename($name)
 
 $lat = trim($_REQUEST['lat']);
 $lon = trim($_REQUEST['lon']);
