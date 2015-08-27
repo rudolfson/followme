@@ -41,12 +41,12 @@
         var Thunderforest_Outdoors = L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
                                      attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>,'
                                         + ' &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
-        var Mapbox = L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-                     maxZoom: 18,
-                     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                                  '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                                  'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                     id: 'examples.map-i875mjb7'});
+        //var Mapbox = L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+        //             maxZoom: 18,
+        //             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        //                          '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        //                          'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        //             id: 'examples.map-i875mjb7'});
         var MapQuestOpen_OSM = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
                                type: 'map',
                                ext: 'jpg',
@@ -64,7 +64,7 @@
             "Opencyclemap": Thunderforest_OpenCycleMap,
             "Hike & Bike": HikeBike_HikeBike,
             "Thunderforest Outdoors": Thunderforest_Outdoors,
-            "Mapbox": Mapbox,
+            //"Mapbox": Mapbox,
             "Mapquest": MapQuestOpen_OSM
         };
         var layersControl = L.control.layers(baseMaps);
