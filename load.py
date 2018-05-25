@@ -34,7 +34,7 @@ try:
     name = form.getfirst('name')
 
     if name:
-        name = re.sub('[^a-zA-Z_.-]', '', name)
+        name = re.sub('[^a-zA-Z_-]', '', name)
         lines = read_data(name)
         success(lines)
     else:

@@ -38,7 +38,7 @@ try:
     data['battery'] = form.getfirst('battery')
 
     if data['lat'] and data['lon'] and data['name']:
-        data['name'] = re.sub('[^a-zA-Z_.-]', '', data['name']) if data['name'] else None
+        data['name'] = re.sub('[^a-zA-Z_-]', '', data['name']) if data['name'] else None
         write_data(data)
         success(data)
     else:
