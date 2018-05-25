@@ -1,5 +1,5 @@
 # followme
-_followme_ is for recording  live tracking from [Locus Map](http://locusmap.eu/) and displaying the tracked position on a map.
+_followme_ is for recording live tracking from [Locus Map](http://locusmap.eu/) and displaying the tracked position on a map.
 
 # Features
 * Record differently named live trackings
