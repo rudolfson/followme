@@ -81,7 +81,7 @@
         var justOpened = true;
 
         var refresh = function() {
-            $.getJSON("load.php?name=" + name, function(data) {
+            $.getJSON("load.py?name=" + name, function(data) {
                 if (data.error) { alert('Error: ' + data.error) }
                 if (data.lat && data.lon) {
                     // Update marker
