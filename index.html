@@ -75,6 +75,9 @@
 
         var marker = L.marker([50.719114, 7.117572]);
         marker.addTo(map);
+        var popup = L.popup();
+        popup.setContent('waiting');
+        marker.bindPopup(popup);
 
         var name = document.location.hash || '#default';
         name = name.substr(1);
@@ -86,12 +89,20 @@
                 if (data.lat && data.lon) {
                     // Update marker
                     marker.setLatLng([data.lat,data.lon]);
+                    // move marker
                     if (justOpened) {
                         map.setView([data.lat, data.lon], 14);
                         justOpened = false;
                     } else if ($('#autoFollow').prop('checked')) {
                         map.setView([data.lat, data.lon]);
                     }
+                    // update popup
+                    var content = '';
+                    if (data.time) content += 'Zeit: ' + data.time;
+                    if (data.alt) content += '<br />Höhe: ' + data.alt;
+                    if (data.speed) content += '<br />Geschwindigkeit: ' + data.speed;
+                    if (data.battery) content += '<br />Akku: ' + data.battery;
+                    popup.setContent(content);
                 }
 
             });
